@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/";
+/******/ 	__webpack_require__.p = "/src/TreeClass/";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -53,7 +53,7 @@
 
 	'use strict';
 	
-	var _tree = __webpack_require__(5);
+	var _tree = __webpack_require__(2);
 	
 	var _tree2 = _interopRequireDefault(_tree);
 	
@@ -73,71 +73,7 @@
 	};
 
 /***/ },
-/* 2 */,
-/* 3 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	//Branch = begin and end point
-	var Branch = function () {
-	  function Branch(start, end) {
-	    _classCallCheck(this, Branch);
-	
-	    this.begin = start;
-	    this.end = end;
-	    this.finished = false;
-	  }
-	
-	  _createClass(Branch, [{
-	    key: "jitter",
-	    value: function jitter() {
-	      this.end.x += random(-1, 1);
-	      this.end.y += random(-1, 1);
-	    }
-	  }, {
-	    key: "show",
-	    value: function show() {
-	      stroke(255);
-	      line(this.begin.x, this.begin.y, this.end.x, this.end.y);
-	    }
-	  }, {
-	    key: "split",
-	    value: function split() {
-	      //SKapar ny vector vid samma beg och end,
-	      //roterar den och flyttar upp den till förra branch end
-	      var direction = p5.Vector.sub(this.end, this.begin);
-	      direction.rotate(PI / 5);
-	      direction.mult(0.7);
-	      var newEnd = p5.Vector.add(this.end, direction);
-	      var right = new Branch(this.end, newEnd); //right
-	
-	      var direction2 = p5.Vector.sub(this.end, this.begin);
-	      direction2.rotate(-PI / 5);
-	      direction2.mult(0.7);
-	      var newEnd2 = p5.Vector.add(this.end, direction2);
-	      var left = new Branch(this.end, newEnd2); //right
-	
-	      return { left: left, right: right };
-	    }
-	  }]);
-	
-	  return Branch;
-	}();
-	
-	exports.default = Branch;
-
-/***/ },
-/* 4 */,
-/* 5 */
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -221,6 +157,68 @@
 	}();
 	
 	exports.default = Tree;
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	//Branch = begin and end point
+	var Branch = function () {
+	  function Branch(start, end) {
+	    _classCallCheck(this, Branch);
+	
+	    this.begin = start;
+	    this.end = end;
+	    this.finished = false;
+	  }
+	
+	  _createClass(Branch, [{
+	    key: "jitter",
+	    value: function jitter() {
+	      this.end.x += random(-1, 1);
+	      this.end.y += random(-1, 1);
+	    }
+	  }, {
+	    key: "show",
+	    value: function show() {
+	      stroke(255);
+	      line(this.begin.x, this.begin.y, this.end.x, this.end.y);
+	    }
+	  }, {
+	    key: "split",
+	    value: function split() {
+	      //SKapar ny vector vid samma beg och end,
+	      //roterar den och flyttar upp den till förra branch end
+	      var direction = p5.Vector.sub(this.end, this.begin);
+	      direction.rotate(PI / 5);
+	      direction.mult(0.7);
+	      var newEnd = p5.Vector.add(this.end, direction);
+	      var right = new Branch(this.end, newEnd); //right
+	
+	      var direction2 = p5.Vector.sub(this.end, this.begin);
+	      direction2.rotate(-PI / 5);
+	      direction2.mult(0.7);
+	      var newEnd2 = p5.Vector.add(this.end, direction2);
+	      var left = new Branch(this.end, newEnd2); //right
+	
+	      return { left: left, right: right };
+	    }
+	  }]);
+	
+	  return Branch;
+	}();
+	
+	exports.default = Branch;
 
 /***/ }
 /******/ ]);

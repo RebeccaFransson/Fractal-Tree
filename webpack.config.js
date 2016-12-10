@@ -3,10 +3,10 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: [
-    './src/main'
+    './src/TreeClass/main'
   ],
   output: {
-      publicPath: '/',
+      publicPath: '/src/TreeClass/',
       filename: 'bundle.js'
   },
   devtool: 'source-map',

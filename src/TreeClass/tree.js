@@ -1,4 +1,4 @@
-import Branch from './Tree/branch'
+import Branch from './branch'
 
 export default class Tree {
 

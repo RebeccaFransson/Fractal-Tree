@@ -1,35 +1,41 @@
-//Branch = begin and end point
-export default class Branch {
-  constructor(start, end){
-    this.begin = start
-    this.end = end
-    this.finished = false
+function Branch(begin, end) {
+  this.begin = begin;
+  this.end = end;
+  this.finished = false
+  this.mul = random(0.55, 0.75)
+
+  this.jitter = function() {
+    this.end.x += random(-0.5, 0.5);
+    this.end.y += random(-0.5, 0.5);
   }
 
-  jitter() {
-      this.end.x += random(-1, 1);
-      this.end.y += random(-1, 1);
+  this.show = function() {
+    stroke(255);
+    line(this.begin.x, this.begin.y, this.end.x, this.end.y);
   }
-  show(){
-    stroke(255)
-    line(this.begin.x, this.begin.y, this.end.x, this.end.y)
+  this.hide = function() {
+    stroke(51);
+    line(this.begin.x, this.begin.y, this.end.x, this.end.y);
   }
-  split(){
-    //SKapar ny vector vid samma beg och end,
-    //roterar den och flyttar upp den till förra branch end
-    let direction = p5.Vector.sub(this.end, this.begin)
-    direction.rotate(PI / 5)
-    direction.mult(0.7)
-    let newEnd = p5.Vector.add(this.end, direction)
-    const right = new Branch(this.end, newEnd)//right
 
-    let direction2 = p5.Vector.sub(this.end, this.begin)
-    direction2.rotate(-PI / 5)
-    direction2.mult(0.7)
-    let newEnd2 = p5.Vector.add(this.end, direction2)
-    const left = new Branch(this.end, newEnd2)//right
 
-    return { left: left, right: right }
+  this.branchA = function() {
+    var dir = p5.Vector.sub(this.end, this.begin);
+    dir.rotate(PI / 5);
+    dir.mult(this.mul);
+    var newEnd = p5.Vector.add(this.end, dir);
+    var b = new Branch(this.end, newEnd);
+    return b;
   }
+  this.branchB = function() {
+    var dir = p5.Vector.sub(this.end, this.begin);
+    dir.rotate(-PI / 5);
+    dir.mult(this.mul);
+    var newEnd = p5.Vector.add(this.end, dir);
+    var b = new Branch(this.end, newEnd);
+    return b;
+  }
+
+
 
 }
